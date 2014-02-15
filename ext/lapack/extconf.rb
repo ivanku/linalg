@@ -226,7 +226,7 @@ EOS
 VALUE #{rbname}(#{args.join(",")})
 {
     #{define_values.join("\n    ") }
-    rb_scan_args(argc, argv, "#{desc[:args].size}*", #{(0..desc[:args].size).map{ |j| "&v#{j}" }.join(', ') });
+    rb_scan_args(argc, argv, "#{ desc[:args].size > 9 ? ('9'+(desc[:args].size%9).to_s) :  desc[:args].size.to_s }", #{(0..desc[:args].size).map{ |j| "&v#{j}" }.join(', ') });
     #{assign.join(" ;\n    ")} ;
 
     #{ret} ;
